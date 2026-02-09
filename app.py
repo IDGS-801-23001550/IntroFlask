@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask import flash
 from flask_wtf.csrf import CSRFProtect
 
+import math
 import forms
 
 app =  Flask(__name__)
@@ -60,6 +61,72 @@ def resultado():
     tem = float(n1)+float(n2)
 
     return f"La suma es: {tem}"
+
+
+@app.route("/distancia", methods=['GET', 'POST'])
+def distancia():
+    v1 = 0
+    v2 = 0
+    x1 = 0
+    x2 = 0
+    y1 = 0
+    y2 = 0
+    res = 0
+
+    if request.method == "POST":
+        x1 = request.form.get("x1")
+        x2 = request.form.get("x2")
+        y1 = request.form.get("y1")
+        y2 = request.form.get("y2")
+        v1 = (float(x2)-float(x1))**2
+        vx1 = math.exp(v1)
+        v2 = (float(y2)-float(y1))**2
+        vy2 = math.exp(v2)
+        res = math.sqrt(float(v1) + float(v2))
+
+    return render_template("distancia.html", x1=x1, x2=x2, y1=y1, y2=y2, res=res)
+
+
+
+@app.route("/cinepolis", methods=["GET", "POST"])
+def cine():
+    resultado = None
+    form = forms.UserFormc(request.form)
+
+    if request.method == "POST" and form.validate():
+        cantidad = form.cantidad.data
+        compradores = form.compradores.data
+        cineco = form.cineco.data
+
+        max_boletos = compradores * 7
+        if cantidad > max_boletos:
+            return render_template(
+                "cinepolis.html",
+                form=form,
+                resultado=f"Máximo {max_boletos} boletos para {compradores} compradores"
+            )
+
+        subtotal = cantidad * 12
+
+        if cantidad > 5:
+            descuento = 0.15
+        elif cantidad >= 3:
+            descuento = 0.10
+        else:
+            descuento = 0
+
+        total = subtotal - (subtotal * descuento)
+
+        if cineco == "si":
+            total -= total * 0.10
+
+        resultado = int(total)
+
+    return render_template(
+        "cinepolis.html",
+        form=form,
+        resultado=resultado
+    )
 
 @app.route("/hola")
 def hola():

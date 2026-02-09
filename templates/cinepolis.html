@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% import "_macros.html" as macros %}
+    <link rel="stylesheet" href="../static/css/style.css">
+    <form action="/cinepolis" method="post" novalidate>
+
+    {{ form.csrf_token }}
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    
+        <div class="contenedor">
+
+            <fieldset class="entrada">
+                <legend>Entradas</legend>
+
+
+                <div class="mb-3">
+                    {{macros.campoNuevo(form.nombre,class="form-control")}}
+                </div>
+                
+
+                <div class="mb-3">
+                    {{ macros.campoNuevo(form.compradores, class="form-control") }}
+                </div>
+
+                <div class="mb-3">
+                    {{macros.campoNuevo(form.cantidad,class="form-control")}}
+                </div>
+                <div class="mb-3">
+                    {{macros.campoNuevo(form.cineco,class="form-control")}}
+                </div>
+
+            </fieldset>
+
+            <fieldset class="salida">
+                <legend>Salidas</legend>
+
+                <label><strong>Total a pagar:</strong></label><br>
+                <input type="text" value="{{ resultado }}" readonly>
+            </fieldset>
+
+        </div>
+        <div class="salida">
+            <fieldset class="acciones">
+                <legend>Acciones</legend>
+                <div class="boton">
+                <button type="submit">Procesar</button>
+                </div>
+            </fieldset>
+        </div>
+    </form>
+
+{% endblock %}

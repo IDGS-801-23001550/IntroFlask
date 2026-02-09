@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-image: url("https://www.nosotros-los-diseñadores.com/wp-content/uploads/2019/06/Logo-Cinepolis.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #11559d;
+    font-family: sans-serif;
+    margin: 40px;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+fieldset {
+    width: 45%;
+    padding: 20px;
+    border: 2px solid #444;
+    border-radius: 8px;
+}
+legend {
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+.entrada {
+    text-align: left;
+}
+
+.salida {
+    text-align: left;
+}
+
+input, select {
+    width: 50%;
+    padding: 6px;
+    margin-top: 5px;
+}
+
+.boton {
+    margin-top: 30px;
+    text-align: center;
+}
+
+button {
+    padding: 10px 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.salida {
+    display: flex;
+    justify-content: center;
+}
